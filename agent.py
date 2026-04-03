@@ -68,6 +68,11 @@ def load_json(file):
         save_json(file, {})  # Reset file to empty JSON
         return {}
 
+def save_json(file, data):
+    # Save JSON data to file
+    with open(file, "w") as f:
+        json.dump(data, f, indent=4)
+
 # ----------------------
 # Brain analysis logic
 # ------------------------
