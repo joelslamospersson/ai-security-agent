@@ -1,3 +1,4 @@
-// Whitelist of allowed IP addresses
-// ["<IP_ADDRESS>", "<IP_ADDRESS>"]
-["127.0.0.1"]
+{
+  "comment": "Whitelist of allowed IP addresses",
+  "ips": ["127.0.0.1"]
+}
