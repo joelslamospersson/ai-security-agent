@@ -30,6 +30,7 @@ DISCORD_WEBHOOKS = "data/discord_webhooks.json"
 AGENT_LOGS = "agent.log"
 
 settings = {}
+patterns = {}  # Global patterns cache
 
 # --------------------------
 # Logging configuration
@@ -77,9 +78,8 @@ def save_json(file, data):
 # Brain analysis logic
 # ------------------------
 def brain(event):
+    global patterns
     logging.info(f"Analyzing event: {event}")
-
-    patterns = load_json(PATTERN_LIST)
 
     # Check for known patterns in the event
     for p, data in patterns.items():
@@ -135,8 +135,13 @@ def monitor():
 # Main function
 # -----------------------
 def main():
+    global patterns
     print("Starting AI-Security Agent ...")
     logging.info("AI-Security Agent started.")
+
+    # Load patterns once at startup ( Instead of loading on every event )
+    patterns = load_json(PATTERN_LIST)
+    logging.info(f"Loaded {len(patterns)} patterns for detection.")
 
     # Start monitoring for events
     monitor()
